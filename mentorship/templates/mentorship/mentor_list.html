@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Find Mentors - HerCode Africa{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Find Your Mentor</h2>
+            <p class="text-muted">Connect with experienced professionals who can guide your tech journey</p>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        {% if mentors %}
+            {% for mentor in mentors %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            {% if mentor.profile_picture %}
+                                <img src="{{ mentor.profile_picture.url }}" class="rounded-circle" width="80" height="80" alt="{{ mentor.user.username }}">
+                            {% else %}
+                                <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; font-size: 2rem;">
+                                    {{ mentor.user.username|first|upper }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <h5 class="card-title text-center">{{ mentor.user.username }}</h5>
+                        <p class="text-center text-muted small">{{ mentor.country }}</p>
+                        
+                        <hr>
+                        
+                        <p><strong>Expertise:</strong> {{ mentor.expertise|default:"Not specified" }}</p>
+                        <p><strong>Experience:</strong> {{ mentor.years_experience }} years</p>
+                        <p><strong>Availability:</strong> {{ mentor.availability|default:"Contact for details" }}</p>
+                        
+                        {% if mentor.bio %}
+                        <p class="small">{{ mentor.bio|truncatewords:20 }}</p>
+                        {% endif %}
+                        
+                        <div class="text-center mt-3">
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'request_mentor' mentor.user.id %}" class="btn btn-primary">Request Mentorship</a>
+                            {% else %}
+                                <a href="{% url 'login' %}" class="btn btn-outline-primary">Login to Request</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-md-12">
+                <div class="alert alert-info text-center">
+                    <h4>No mentors available yet</h4>
+                    <p>Check back soon or become a mentor yourself!</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

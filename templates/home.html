@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-4">Welcome to HerCode Africa</h1>
+        <p class="lead mb-4">Empowering African Women in Technology Through Mentorship & Community</p>
+        <div class="mt-5">
+            <a href="/register/" class="btn btn-light btn-lg me-3">Get Started</a>
+            <a href="/tutorials/" class="btn btn-outline-light btn-lg">Browse Tutorials</a>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row text-center mb-5">
+        <div class="col-md-12">
+            <h2 class="fw-bold mb-3">Our Mission</h2>
+            <p class="lead text-muted">
+                Bridging the gender gap in technology by connecting African women with mentors, 
+                resources, and supportive peer communities.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="mb-3" style="font-size: 3rem;">👥</div>
+                <h4>Find Mentors</h4>
+                <p class="text-muted">
+                    Connect with experienced professionals who guide your tech journey
+                </p>
+                <a href="/mentors/" class="btn btn-primary mt-auto">Find a Mentor</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="mb-3" style="font-size: 3rem;">📚</div>
+                <h4>Learn & Grow</h4>
+                <p class="text-muted">
+                    Access curated programming tutorials from beginner to advanced
+                </p>
+                <a href="/tutorials/" class="btn btn-primary mt-auto">Start Learning</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 text-center p-4">
+                <div class="mb-3" style="font-size: 3rem;">🤝</div>
+                <h4>Join Communities</h4>
+                <p class="text-muted">
+                    Connect with peers in supportive learning groups
+                </p>
+                <a href="/groups/" class="btn btn-primary mt-auto">Join a Group</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card bg-light p-5 text-center">
+                <h3 class="mb-3">Why HerCode Africa?</h3>
+                <div class="row">
+                    <div class="col-md-3">
+                        <h2 class="text-primary">30%</h2>
+                        <p>Women in STEM worldwide</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h2 class="text-primary">Lower</h2>
+                        <p>In Africa due to barriers</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h2 class="text-primary">100%</h2>
+                        <p>Commitment to change</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h2 class="text-primary">Together</h2>
+                        <p>We can make a difference</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 text-center">
+        <div class="col-md-12">
+            <h3 class="mb-4">Ready to Start Your Journey?</h3>
+            <a href="/register/" class="btn btn-primary btn-lg">Join HerCode Africa Today</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

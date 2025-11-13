@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Mentee Dashboard - HerCode Africa{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Welcome, {{ user.username }}! 👩‍💻</h2>
+            <p class="text-muted">Your learning dashboard</p>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card text-center p-3">
+                <h1 class="text-primary">0</h1>
+                <p class="mb-0">Completed Tutorials</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center p-3">
+                <h1 class="text-primary">0</h1>
+                <p class="mb-0">Active Mentorships</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center p-3">
+                <h1 class="text-primary">0</h1>
+                <p class="mb-0">Peer Groups</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center p-3">
+                <h1 class="text-primary">0</h1>
+                <p class="mb-0">Hours Learned</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Actions</h5>
+                    <div class="d-grid gap-2">
+                        <a href="/mentors/" class="btn btn-outline-primary">Find a Mentor</a>
+                        <a href="/tutorials/" class="btn btn-outline-primary">Browse Tutorials</a>
+                        <a href="/groups/" class="btn btn-outline-primary">Join Peer Groups</a>
+                        <a href="{% url 'profile_update' %}" class="btn btn-outline-secondary">Update Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Your Profile</h5>
+                    <p><strong>Country:</strong> {{ profile.country }}</p>
+                    <p><strong>Skill Level:</strong> {{ profile.skill_level|default:"Not set" }}</p>
+                    <p><strong>Interests:</strong> {{ profile.areas_of_interest|default:"Not set" }}</p>
+                    <p><strong>Member Since:</strong> {{ profile.created_at|date:"F d, Y" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Recent Activity</h5>
+                    <p class="text-muted">No recent activity yet. Start learning to see your progress here!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

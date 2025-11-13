@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ tutorial.title }} - HerCode Africa{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'tutorial_list' %}">Tutorials</a></li>
+                    <li class="breadcrumb-item active">{{ tutorial.title }}</li>
+                </ol>
+            </nav>
+            
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h2>{{ tutorial.title }}</h2>
+                            <p class="text-muted">{{ tutorial.category }} | By {{ tutorial.created_by.username }}</p>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-primary mb-2">{{ tutorial.difficulty|title }}</span><br>
+                            <span class="badge bg-secondary">{{ tutorial.duration }} minutes</span>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <h5>Description</h5>
+                    <p>{{ tutorial.description }}</p>
+                    
+                    <hr>
+                    
+                    <h5>Tutorial Content</h5>
+                    <div class="tutorial-content">
+                        {{ tutorial.content|linebreaks }}
+                    </div>
+                    
+                    {% if tutorial.video_url %}
+                    <hr>
+                    <h5>Video Tutorial</h5>
+                    <div class="ratio ratio-16x9">
+                        <iframe src="{{ tutorial.video_url }}" allowfullscreen></iframe>
+                    </div>
+                    {% endif %}
+                    
+                    <hr>
+                    
+                    {% if user.is_authenticated %}
+                        {% if progress and progress.completed %}
+                            <div class="alert alert-success">
+                                <strong>✓ Completed!</strong> You finished this tutorial on {{ progress.completion_date|date:"F d, Y" }}
+                            </div>
+                        {% else %}
+                            <form method="POST" action="{% url 'mark_complete' tutorial.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success btn-lg">Mark as Complete</button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <div class="alert alert-info">
+                            <a href="{% url 'login' %}">Login</a> to track your progress
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Tutorial Info</h5>
+                    <p><strong>Level:</strong> {{ tutorial.difficulty|title }}</p>
+                    <p><strong>Duration:</strong> {{ tutorial.duration }} minutes</p>
+                    <p><strong>Category:</strong> {{ tutorial.category }}</p>
+                    <p><strong>Created:</strong> {{ tutorial.created_at|date:"F d, Y" }}</p>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5>More Actions</h5>
+                    <a href="{% url 'tutorial_list' %}" class="btn btn-outline-primary w-100 mb-2">Back to Tutorials</a>
+                    <a href="{% url 'my_progress' %}" class="btn btn-outline-secondary w-100">View My Progress</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
